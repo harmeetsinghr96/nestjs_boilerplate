@@ -9,13 +9,8 @@ export class UtilsService {
     return obj;
   }
 
-  throwError(
-    status: number,
-    message: string,
-    errors: Record<string, any> = {},
-  ) {
+  throwError(message: string, errors: Record<string, any> = {}) {
     const error: Record<string, any> = new Error(message);
-    error.status = status;
     error.error = errors;
     return error;
   }
