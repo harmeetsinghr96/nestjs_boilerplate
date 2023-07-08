@@ -17,5 +17,6 @@ export class UtilsService {
     const error: Record<string, any> = new Error(message);
     error.status = status;
     error.error = errors;
+    return error;
   }
 }
