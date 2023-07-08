@@ -1,3 +1,10 @@
+# node modules
+/services/user_service/node_modules
+/services/user_service/dist
+
+/services/gateway_service/node_modules
+/services/gateway_service/dist
+
 # Logs
 logs
 *.log

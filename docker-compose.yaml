@@ -1,0 +1,37 @@
+version: "2.2"
+services:
+  gateway_service:
+    hostname: gateway_service
+    ports:
+      - "0.0.0.0:8081:8081"
+    container_name: gateway_service
+    build: ./services/gateway_service/
+    restart: always
+    env_file:
+      - ./config/gateway.env
+    networks:
+      my_network:
+        ipv4_address: 30.10.11.2
+  user_service:
+    hostname: user_service
+    ports:
+      - "0.0.0.0:3001:3001"
+    container_name: user_service
+    restart: always
+    build: ./services/user_service
+    env_file:
+      - ./config/user.env
+    depends_on:
+      - gateway_service
+    networks:
+      my_network:
+        ipv4_address: 30.10.11.3
+networks:
+  my_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      config:
+        - subnet: 30.10.11.0/16
+          gateway: 30.10.11.1
